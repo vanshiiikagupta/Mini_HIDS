@@ -1,0 +1,6 @@
+{
+  "suspicious_processes": ["nc", "netcat", "ncat", "socat", "meterpreter", "msfconsole"],
+  "suspicious_ports": [4444, 5555, 6666, 9999],
+  "suspicious_filenames": ["reverse_shell.sh", "payload.bin", "malware.exe"]
+}
+

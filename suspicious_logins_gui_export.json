@@ -1,0 +1,222 @@
+[
+  {
+    "id": 1803,
+    "ts": "2025-11-14T20:46:52.074304Z",
+    "ev": {
+      "ts": "2025-11-14T20:46:52.074304Z",
+      "type": "gui_login_attempt",
+      "user_entered": "teacher",
+      "result": "success",
+      "source": "gui"
+    }
+  },
+  {
+    "id": 1796,
+    "ts": "2025-11-14T20:18:56.957482Z",
+    "ev": {
+      "ts": "2025-11-14T20:18:56.957482Z",
+      "type": "gui_login_attempt",
+      "user_entered": "attacker",
+      "result": "failed",
+      "source": "demo_script"
+    }
+  },
+  {
+    "id": 1795,
+    "ts": "2025-11-14T20:13:38.065041Z",
+    "ev": {
+      "ts": "2025-11-14T20:13:38.065041Z",
+      "type": "gui_login_attempt",
+      "user_entered": "attacker",
+      "result": "failed",
+      "source": "demo_script"
+    }
+  },
+  {
+    "id": 1792,
+    "ts": "2025-11-14T20:11:35.484213Z",
+    "ev": {
+      "ts": "2025-11-14T20:11:35.484213Z",
+      "type": "gui_login_attempt",
+      "user_entered": "attacker",
+      "result": "failed",
+      "source": "demo_script"
+    }
+  },
+  {
+    "id": 1791,
+    "ts": "2025-11-14T20:06:33.874884Z",
+    "ev": {
+      "ts": "2025-11-14T20:06:33.874884Z",
+      "type": "gui_login_attempt",
+      "user_entered": "attacker",
+      "result": "failed",
+      "source": "demo_script"
+    }
+  },
+  {
+    "id": 1790,
+    "ts": "2025-11-14T20:03:08.743231Z",
+    "ev": {
+      "ts": "2025-11-14T20:03:08.743231Z",
+      "type": "gui_login_attempt",
+      "user_entered": "attacker",
+      "result": "failed",
+      "source": "demo_script"
+    }
+  },
+  {
+    "id": 1788,
+    "ts": "2025-11-14T19:52:59.243222Z",
+    "ev": {
+      "ts": "2025-11-14T19:52:59.243222Z",
+      "type": "gui_login_attempt",
+      "user_entered": "attacker",
+      "result": "failed",
+      "source": "cli_test"
+    }
+  },
+  {
+    "id": 1786,
+    "ts": "2025-11-14T19:52:46.962479Z",
+    "ev": {
+      "ts": "2025-11-14T19:52:46.962479Z",
+      "type": "gui_login_attempt",
+      "user_entered": "attacker",
+      "result": "failed",
+      "source": "cli_test"
+    }
+  },
+  {
+    "id": 1671,
+    "ts": "2025-11-11T20:09:29.342330Z",
+    "ev": {
+      "ts": "2025-11-11T20:09:29.342330Z",
+      "type": "gui_login_attempt",
+      "user_entered": "fnvhvy",
+      "result": "failed",
+      "source": "gui"
+    }
+  },
+  {
+    "id": 1669,
+    "ts": "2025-11-11T20:09:27.058257Z",
+    "ev": {
+      "ts": "2025-11-11T20:09:27.058257Z",
+      "type": "gui_login_attempt",
+      "user_entered": "fnvhvy",
+      "result": "failed",
+      "source": "gui"
+    }
+  },
+  {
+    "id": 1667,
+    "ts": "2025-11-11T20:09:24.209200Z",
+    "ev": {
+      "ts": "2025-11-11T20:09:24.209200Z",
+      "type": "gui_login_attempt",
+      "user_entered": "fnvhvy",
+      "result": "failed",
+      "source": "gui"
+    }
+  },
+  {
+    "id": 1662,
+    "ts": "2025-11-11T20:06:31.813026Z",
+    "ev": {
+      "ts": "2025-11-11T20:06:31.813026Z",
+      "type": "gui_login_attempt",
+      "user_entered": "vanshika",
+      "result": "failed",
+      "source": "gui"
+    }
+  },
+  {
+    "id": 1660,
+    "ts": "2025-11-11T20:06:29.479220Z",
+    "ev": {
+      "ts": "2025-11-11T20:06:29.479220Z",
+      "type": "gui_login_attempt",
+      "user_entered": "vanshika",
+      "result": "failed",
+      "source": "gui"
+    }
+  },
+  {
+    "id": 1658,
+    "ts": "2025-11-11T20:06:20.331340Z",
+    "ev": {
+      "ts": "2025-11-11T20:06:20.331340Z",
+      "type": "gui_login_attempt",
+      "user_entered": "vanshika",
+      "result": "failed",
+      "source": "gui"
+    }
+  },
+  {
+    "id": 1644,
+    "ts": "2025-11-11T20:02:39.958957Z",
+    "ev": {
+      "ts": "2025-11-11T20:02:39.958957Z",
+      "type": "gui_login_attempt",
+      "user_entered": "teacher",
+      "result": "failed",
+      "source": "gui"
+    }
+  },
+  {
+    "id": 1642,
+    "ts": "2025-11-11T20:02:37.219368Z",
+    "ev": {
+      "ts": "2025-11-11T20:02:37.219368Z",
+      "type": "gui_login_attempt",
+      "user_entered": "teacher",
+      "result": "failed",
+      "source": "gui"
+    }
+  },
+  {
+    "id": 1640,
+    "ts": "2025-11-11T20:02:27.491353Z",
+    "ev": {
+      "ts": "2025-11-11T20:02:27.491353Z",
+      "type": "gui_login_attempt",
+      "user_entered": "teacher",
+      "result": "failed",
+      "source": "gui"
+    }
+  },
+  {
+    "id": 1637,
+    "ts": "2025-11-11T20:00:22.374087Z",
+    "ev": {
+      "ts": "2025-11-11T20:00:22.374087Z",
+      "type": "gui_login_attempt",
+      "user_entered": "teacher",
+      "result": "success",
+      "source": "gui"
+    }
+  },
+  {
+    "id": 1622,
+    "ts": "2025-11-11T19:01:49.198493Z",
+    "ev": {
+      "ts": "2025-11-11T19:01:49.198493Z",
+      "type": "gui_login_attempt",
+      "user_entered": "teacher",
+      "result": "success",
+      "source": "gui"
+    }
+  },
+  {
+    "id": 1372,
+    "ts": "2025-11-11T17:56:40.583331Z",
+    "ev": {
+      "ts": "2025-11-11T17:56:40.583331Z",
+      "type": "gui_login_attempt",
+      "user_entered": "teacher",
+      "result": "success",
+      "source": "gui"
+    }
+  }
+]
