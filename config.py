@@ -17,11 +17,11 @@ DB_PATH = "storage/logs_encrypted.db"
 SMTP = {
     "host": "smtp.gmail.com",
     "port": 587,
-    "username": "vanshiikagupta@gmail.com",
+    "username": "student.sender@gmail.com",
     # Gmail credentials
-    "password": "vgzd gnvq okqr srwz",
-    "from_addr": "vanshiikagupta@gmail.com",
-    "to_addrs": ["vanshiikagupta@gmail.com"]  # list of addresses to notify
+    "password": "16 character password",
+    "from_addr": "student.sender@gmail.com",
+    "to_addrs": ["teacher.receiver@gmail.com"]  # list of addresses to notify
 }
 
 # Monitoring thresholds
