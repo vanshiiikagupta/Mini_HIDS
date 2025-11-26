@@ -79,11 +79,11 @@ class NetMonitor:
                             sev = {"ts": now_iso(), "type": "suspicious_connection", "pid": pid, "local": laddr, "remote": raddr}
                             try:
                                 add_event(sev)
-                                alert_callback(sev)
+                            
                                 continue
                             except Exception:
                                 pass
-                    alert_callback(ev)
+                             continue
                 except Exception:
                     pass
 
@@ -102,9 +102,9 @@ class NetMonitor:
                     if port and port in RULES.get("suspicious_ports", []):
                         sev = {"ts": now_iso(), "type":"suspicious_listen", "pid": pid, "local": l}
                         add_event(sev)
-                        alert_callback(sev)
+                        
                     else:
-                        alert_callback(ev)
+                        pass
                 except Exception:
                     pass
 
