@@ -14,7 +14,7 @@ class AuthMonitor:
 
         ts = now_iso()
 
-        # === Wrong username ===
+        # Wrong username 
         if username != TRUSTED_USER:
             add_event({"ts": ts, "type": "login_failed", "reason": "unknown_user", "user": username})
             send_email(
@@ -29,7 +29,7 @@ class AuthMonitor:
             )
             return False
 
-        # === Wrong password ===
+        #Wrong password
         if password != TRUSTED_PASSWORD:
             add_event({"ts": ts, "type": "login_failed", "reason": "wrong_password", "user": username})
             send_email(
@@ -43,7 +43,7 @@ class AuthMonitor:
             )
             return False
 
-        # === Suspicious login even for correct user ===
+        #Suspicious login even for correct user
         if source_ip not in ["127.0.0.1", "localhost"]:
             add_event({"ts": ts, "type": "login_suspicious_ip", "user": username, "ip": source_ip})
             send_email(
@@ -55,7 +55,7 @@ class AuthMonitor:
                 rate_seconds=20
             )
 
-        # === Trusted teacher login (NO EMAIL) ===
+        # Trusted teacher login (NO EMAIL)
         add_event({"ts": ts, "type": "login_success", "user": username})
         return True
 
