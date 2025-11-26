@@ -68,7 +68,7 @@ class HIDS:
                     pass
                 return False
 
-            # If monitor provided a rate key/seconds, prefer them (login_monitor sets these)
+            
             rate_key = event.get("_rate_key")
             rate_seconds = event.get("_rate_seconds")
             if rate_seconds is None:
@@ -77,7 +77,7 @@ class HIDS:
                 except Exception:
                     rate_seconds = 300
 
-            # If no provided rate_key, construct a stable one
+            
             if not rate_key:
                 if etype.startswith("auth") or etype.startswith("gui"):
                     user_key = user or 'nouser'
