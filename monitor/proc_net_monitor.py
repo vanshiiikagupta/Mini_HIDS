@@ -6,7 +6,6 @@ Features:
 - Detects new processes using psutil
 - Detects suspicious processes from rules.json
 - Logs all events to encrypted DB
-- Calls central alert() in monitor_core with proper rate_key to avoid multiple emails
 """
 
 import os
@@ -26,9 +25,8 @@ BASE_DIR = os.path.dirname(__file__)
 RULES_PATH = os.path.join(BASE_DIR, "..", "rules.json")
 CREDS_PATH = os.path.join(BASE_DIR, "..", "assets", "teacher_creds.json")
 
-# -------------------------------------------------------
 # Load suspicious process names
-# -------------------------------------------------------
+
 def _load_suspicious():
     try:
         rules = read_json(RULES_PATH, default={})
@@ -39,9 +37,8 @@ def _load_suspicious():
 SUSPICIOUS = _load_suspicious()
 
 
-# -------------------------------------------------------
 # Load teacher username
-# -------------------------------------------------------
+
 def _load_teacher():
     try:
         obj = read_json(CREDS_PATH, default={})
@@ -52,10 +49,8 @@ def _load_teacher():
 
 TEACHER_USER = _load_teacher()
 
-
-# -------------------------------------------------------
 # Build stable rate key (PREVENT MULTIPLE EMAILS)
-# -------------------------------------------------------
+
 def _proc_rate_key(name, user):
     """
     Every *unique* process name + user combination gets ONE email per cooldown.
@@ -76,10 +71,8 @@ def _proc_rate_seconds():
     except Exception:
         return 600
 
-
-# -------------------------------------------------------
 # Main monitor class
-# -------------------------------------------------------
+
 class ProcNetMonitor:
     def __init__(self, polling_interval=1.0):
         self.polling = float(polling_interval)
@@ -119,67 +112,59 @@ class ProcNetMonitor:
         }
 
     def run_loop(self, stop_event, alert_callback):
-        """Main monitoring loop."""
-        if psutil is None:
-            add_event({"ts": now_iso(), "type": "proc_monitor_missing_psutil"})
-            return
+    """Main monitoring loop without sending emails."""
+    if psutil is None:
+        add_event({"ts": now_iso(), "type": "proc_monitor_missing_psutil"})
+        return
 
+    try:
+        self._prev_snapshot = self._snapshot()
+    except Exception:
+        self._prev_snapshot = {}
+
+    while not stop_event.is_set():
         try:
-            self._prev_snapshot = self._snapshot()
-        except Exception:
-            self._prev_snapshot = {}
+            time.sleep(self.polling)
+            cur = self._snapshot()
 
-        while not stop_event.is_set():
-            try:
-                time.sleep(self.polling)
-                cur = self._snapshot()
+            new_pids = set(cur.keys()) - set(self._prev_snapshot.keys())
+            for pid in sorted(new_pids):
+                name, user = cur.get(pid, ("", ""))
 
-                new_pids = set(cur.keys()) - set(self._prev_snapshot.keys())
-                for pid in sorted(new_pids):
-                    name, user = cur.get(pid, ("", ""))
+                # Ignore teacher-owned processes
+                if user and user == TEACHER_USER:
+                    add_event({
+                        "ts": now_iso(),
+                        "type": "process_ignored_teacher",
+                        "pid": pid,
+                        "name": name,
+                        "user": user
+                    })
+                    continue
 
-                    # Ignore teacher-owned processes
-                    if user and user == TEACHER_USER:
-                        add_event({
-                            "ts": now_iso(),
-                            "type": "process_ignored_teacher",
-                            "pid": pid,
-                            "name": name,
-                            "user": user
-                        })
-                        continue
+                # Normal process event
+                ev = self._ev("process_start", pid, name, user)
+                try:
+                    add_event(ev)  # log only, no email
+                except Exception:
+                    pass
 
-                    # Normal process_start
-                    ev = self._ev("process_start", pid, name, user)
+                # Suspicious process
+                if name.lower() in SUSPICIOUS:
+                    sev = self._ev("suspicious_process", pid, name, user)
                     try:
-                        add_event(ev)
+                        add_event(sev)  # log only, no email
                     except Exception:
                         pass
 
-                    # Suspicious?
-                    if name.lower() in SUSPICIOUS:
-                        sev = self._ev("suspicious_process", pid, name, user)
-                        try:
-                            add_event(sev)
-                        except Exception:
-                            pass
-                        try:
-                            alert_callback(sev)
-                        except Exception:
-                            pass
+            self._prev_snapshot = cur
 
-                    # Normal process alert
-                    else:
-                        try:
-                            alert_callback(ev)
-                        except Exception:
-                            pass
+        except Exception as e:
+            add_event({"ts": now_iso(), "type": "proc_monitor_error", "error": str(e)})
+            time.sleep(1)
 
-                self._prev_snapshot = cur
+    add_event({"ts": now_iso(), "type": "proc_monitor_stopped"})
 
-            except Exception as e:
-                add_event({"ts": now_iso(), "type": "proc_monitor_error", "error": str(e)})
-                time.sleep(1)
 
         add_event({"ts": now_iso(), "type": "proc_monitor_stopped"})
 
